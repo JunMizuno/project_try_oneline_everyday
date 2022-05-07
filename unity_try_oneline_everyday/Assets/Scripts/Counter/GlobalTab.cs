@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalTab : MonoBehaviour
+namespace Counter
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GlobalTab
     {
-        
-    }
+        public const string SLOT_FIRST = "SLOT_FIRST";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public const string SLOT_SECOND = "SLOT_SECOND";
+
+        public const string SLOT_THIRD = "SLOT_THIRD";
     }
 }
