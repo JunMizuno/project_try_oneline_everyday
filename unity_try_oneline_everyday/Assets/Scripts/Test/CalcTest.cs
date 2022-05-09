@@ -8,7 +8,7 @@ namespace Test
     {
         private void Start()
         {
-            Debug.Log("<color=cyan>" + "CalcTest  Start" + "</color>");
+
         }
 
         private void Update()
