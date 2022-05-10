@@ -23,6 +23,7 @@ namespace Test
         private float shakingAddForceX = default;
         private float shakingAddForceY = default;
         private float shakingAddForceZ = default;
+        private Vector3 originalLocalPos = Vector3.zero;
 
         private void Start()
         {
@@ -32,6 +33,7 @@ namespace Test
         private void Update()
         {
             Floating(new Vector3(0.0f, 0.5f, 0.0f), 2.0f);
+
             Shake();
         }
 
@@ -88,26 +90,58 @@ namespace Test
 
         private void Shake(float second = 0.0f)
         {
-            var localPos = this.transform.localPosition;
+            if (isShaking)
+            {
+                return;
+            }
 
-            // 初回のみ
-            if (!isShaking)
+            isShaking = true;
+
+            StartCoroutine(ShakingObject());
+
+            // @todo.mizuno 後は指定時間に近づくに連れて振動が収まるように。
+        }
+
+        private IEnumerator ShakingObject()
+        {
+            var localPos = this.transform.localPosition;
+            originalLocalPos = localPos;
+
+            // 初動の設定。
             {
                 shakingAddForceX = -0.25f;
                 localPos.x += shakingAddForceX;
                 this.transform.localPosition = localPos;
-
-                isShaking = true;
                 shakingAddForceX = -0.25f * 2.0f;
-
-                return;
             }
 
-            shakingAddForceX *= -1.0f;
-            localPos.x += shakingAddForceX;
-            this.transform.localPosition = localPos;
+            // 条件を満たしている間は揺らす。
+            bool enable = true;
+            while (enable)
+            {
+                shakingAddForceX *= -1.0f;
+                if (shakingAddForceX >= 0.0f)
+                {
+                    if (shakingAddForceX <= 0.01f)
+                    {
+                        enable = false;
+                    }
 
-            // @todo.mizuno 後は指定時間に近づくに連れて振動が収まるように。
+                    shakingAddForceX -= 0.01f;
+                }
+
+                localPos.x += shakingAddForceX;
+                this.transform.localPosition = localPos;
+
+                // @todo.mizuno このあたりの設定値が曖昧。(今は60FPS換算で2フレーム分のウエイト。)
+                yield return new WaitForSeconds(0.032f);
+            }
+
+            // 初期値に戻す。
+            shakingAddForceX = 0.0f;
+            this.transform.localPosition = originalLocalPos;
+
+            yield return true;
         }
     }
 }
