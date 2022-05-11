@@ -127,10 +127,17 @@ namespace Test
                         enable = false;
                     }
 
+                    // 前回よりも揺らす距離を減らす。(プラス方向の場合)
                     shakingAddForceX -= 0.01f;
+                }
+                else
+                {
+                    // 前回よりも揺らす距離を減らす。(マイナス方向の場合)
+                    shakingAddForceX += 0.01f;
                 }
 
                 localPos.x += shakingAddForceX;
+
                 this.transform.localPosition = localPos;
 
                 // @todo.mizuno このあたりの設定値が曖昧。(今は60FPS換算で2フレーム分のウエイト。)
@@ -140,6 +147,7 @@ namespace Test
             // 初期値に戻す。
             shakingAddForceX = 0.0f;
             this.transform.localPosition = originalLocalPos;
+            originalLocalPos = Vector3.zero;
 
             yield return true;
         }
