@@ -11,5 +11,7 @@ namespace Counter
         public const string SLOT_SECOND = "SLOT_SECOND";
 
         public const string SLOT_THIRD = "SLOT_THIRD";
+
+
     }
 }
