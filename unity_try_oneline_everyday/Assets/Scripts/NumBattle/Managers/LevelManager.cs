@@ -1,12 +1,10 @@
 namespace NumBattle
 {
-    public sealed class PlayManager : SingletonMonoBehaviour<PlayManager>
+    public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
         protected override void Awake()
         {
             base.Awake();
-
-            DontDestroyOnLoad(this);
         }
 
         public override void OnDestory()

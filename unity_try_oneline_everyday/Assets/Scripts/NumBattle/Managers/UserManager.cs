@@ -1,4 +1,3 @@
-using System.Collections;
 namespace NumBattle
 {
     public sealed class UserManager : SingletonMonoBehaviour<UserManager>
@@ -8,6 +7,11 @@ namespace NumBattle
             base.Awake();
 
             DontDestroyOnLoad(this);
+        }
+
+        public override void OnDestory()
+        {
+            base.OnDestory();
         }
     }
 }
