@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace NumBattle
 {
@@ -8,12 +9,20 @@ namespace NumBattle
     {
         protected void Start()
         {
-            Debug.Log("<color=cyan>" + "ObjectBase  Start" + "</color>");
+
         }
 
         protected void Update()
         {
-            Debug.Log("<color=cyan>" + "ObjectBase  Update" + "</color>");
+
+        }
+
+        private void OnMouseDown()
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
         }
     }
 }
