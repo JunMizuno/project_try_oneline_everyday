@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Test
@@ -12,12 +12,12 @@ namespace Test
     {
         private void Start()
         {
-            
+
         }
 
         /// <summary>
-        /// Interface‚ğg‚¤ê‡AEvent‚Ìê‡‚Íprivate‚Íƒ_ƒ‚Æ‚Ì‚±‚ÆB
-        /// SendMessage‚ğ•¹—p‚µ‚Ä‚¢‚éê‡Aƒƒ\ƒbƒh–¼‚Íd•¡‚µ‚È‚¢‚æ‚¤‚É‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢B
+        /// Interfaceã‚’ä½¿ã†å ´åˆã€Eventã®å ´åˆã¯privateã¯ãƒ€ãƒ¡ã¨ã®ã“ã¨ã€‚
+        /// SendMessageã‚’ä½µç”¨ã—ã¦ã„ã‚‹å ´åˆã€ãƒ¡ã‚½ãƒƒãƒ‰åã¯é‡è¤‡ã—ãªã„ã‚ˆã†ã«ã—ãªã„ã¨ã„ã‘ãªã„ã€‚
         /// </summary>
         public void OnReceive()
         {

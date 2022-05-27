@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +33,7 @@ namespace NumBattle
 
         public void OnClickMethod()
         {
-            Debug.Log("<color=red>" + "•s‰ÂN—Ìˆæ‚ğƒ^ƒbƒ`" + "</color>");
+            Debug.Log("<color=red>" + "ä¸å¯ä¾µé ˜åŸŸã‚’ã‚¿ãƒƒãƒ" + "</color>");
         }
     }
 }

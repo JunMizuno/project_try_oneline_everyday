@@ -1,4 +1,4 @@
-namespace NumBattle
+﻿namespace NumBattle
 {
     public sealed class FieldNumber : NumberBase
     {

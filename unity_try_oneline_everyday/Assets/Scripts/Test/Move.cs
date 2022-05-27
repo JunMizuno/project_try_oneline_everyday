@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ namespace Test
     public class Move : MonoBehaviour
     {
         bool isMoving = default;
-        float movingPassedTime = default; 
+        float movingPassedTime = default;
 
         private float movingDegreeX = default;
         private float movingDegreeY = default;
@@ -47,7 +47,7 @@ namespace Test
 
             if (degree < 90.0f)
             {
-                // @todo.mizuno ‚±‚ê‚Ì‘¬“x‚ğ‹‚ß‚È‚¢‚Æ‚¢‚¯‚È‚¢B(‹——£/ŠÔ)
+                // @todo.mizuno ã“ã‚Œã®é€Ÿåº¦ã‚’æ±‚ã‚ãªã„ã¨ã„ã‘ãªã„ã€‚(è·é›¢/æ™‚é–“)
                 degree += 0.25f;
                 addForce = Mathf.Cos(degree * Mathf.Deg2Rad) * 0.05f;
                 y += addForce;
@@ -68,22 +68,22 @@ namespace Test
 
             //Debug.Log("<color=cyan>" + "  DiffX:" + diffX + "  DiffY:" + diffY + "  DiffZ:" + diffZ + "</color>");
 
-            // X²À•W‚ÌˆÚ“®
+            // Xè»¸åº§æ¨™ã®ç§»å‹•
             if (diffX > 0.0f)
             {
-                
+
             }
 
-            // Y²À•W‚ÌˆÚ“®
+            // Yè»¸åº§æ¨™ã®ç§»å‹•
             if (diffY > 0.0f)
             {
 
             }
 
-            // Z²À•W‚ÌˆÚ“®
+            // Zè»¸åº§æ¨™ã®ç§»å‹•
             if (diffZ > 0.0f)
             {
-                
+
             }
 
         }
@@ -99,7 +99,7 @@ namespace Test
 
             StartCoroutine(ShakingObject());
 
-            // @todo.mizuno Œã‚Íw’èŠÔ‚É‹ß‚Ã‚­‚É˜A‚ê‚ÄU“®‚ªû‚Ü‚é‚æ‚¤‚ÉB
+            // @todo.mizuno å¾Œã¯æŒ‡å®šæ™‚é–“ã«è¿‘ã¥ãã«é€£ã‚Œã¦æŒ¯å‹•ãŒåã¾ã‚‹ã‚ˆã†ã«ã€‚
         }
 
         private IEnumerator ShakingObject()
@@ -107,7 +107,7 @@ namespace Test
             var localPos = this.transform.localPosition;
             originalLocalPos = localPos;
 
-            // ‰“®‚Ìİ’èB
+            // åˆå‹•ã®è¨­å®šã€‚
             {
                 shakingAddForceX = -0.25f;
                 localPos.x += shakingAddForceX;
@@ -115,7 +115,7 @@ namespace Test
                 shakingAddForceX = -0.25f * 2.0f;
             }
 
-            // ğŒ‚ğ–‚½‚µ‚Ä‚¢‚éŠÔ‚Í—h‚ç‚·B
+            // æ¡ä»¶ã‚’æº€ãŸã—ã¦ã„ã‚‹é–“ã¯æºã‚‰ã™ã€‚
             bool enable = true;
             while (enable)
             {
@@ -127,12 +127,12 @@ namespace Test
                         enable = false;
                     }
 
-                    // ‘O‰ñ‚æ‚è‚à—h‚ç‚·‹——£‚ğŒ¸‚ç‚·B(ƒvƒ‰ƒX•ûŒü‚Ìê‡)
+                    // å‰å›ã‚ˆã‚Šã‚‚æºã‚‰ã™è·é›¢ã‚’æ¸›ã‚‰ã™ã€‚(ãƒ—ãƒ©ã‚¹æ–¹å‘ã®å ´åˆ)
                     shakingAddForceX -= 0.01f;
                 }
                 else
                 {
-                    // ‘O‰ñ‚æ‚è‚à—h‚ç‚·‹——£‚ğŒ¸‚ç‚·B(ƒ}ƒCƒiƒX•ûŒü‚Ìê‡)
+                    // å‰å›ã‚ˆã‚Šã‚‚æºã‚‰ã™è·é›¢ã‚’æ¸›ã‚‰ã™ã€‚(ãƒã‚¤ãƒŠã‚¹æ–¹å‘ã®å ´åˆ)
                     shakingAddForceX += 0.01f;
                 }
 
@@ -140,11 +140,11 @@ namespace Test
 
                 this.transform.localPosition = localPos;
 
-                // @todo.mizuno ‚±‚Ì‚ ‚½‚è‚Ìİ’è’l‚ªB–†B(¡‚Í60FPSŠ·Z‚Å2ƒtƒŒ[ƒ€•ª‚ÌƒEƒGƒCƒgB)
+                // @todo.mizuno ã“ã®ã‚ãŸã‚Šã®è¨­å®šå€¤ãŒæ›–æ˜§ã€‚(ä»Šã¯60FPSæ›ç®—ã§2ãƒ•ãƒ¬ãƒ¼ãƒ åˆ†ã®ã‚¦ã‚¨ã‚¤ãƒˆã€‚)
                 yield return new WaitForSeconds(0.032f);
             }
 
-            // ‰Šú’l‚É–ß‚·B
+            // åˆæœŸå€¤ã«æˆ»ã™ã€‚
             shakingAddForceX = 0.0f;
             this.transform.localPosition = originalLocalPos;
             originalLocalPos = Vector3.zero;

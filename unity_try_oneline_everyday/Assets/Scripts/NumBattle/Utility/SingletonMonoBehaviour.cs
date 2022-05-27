@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NumBattle
 {
     /// <summary>
-    /// ƒVƒ“ƒOƒ‹ƒgƒ“ƒx[ƒX
+    /// ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ãƒ™ãƒ¼ã‚¹
     /// </summary>
-    /// <typeparam name="T">where T : T ‚Í MonoBehaviour ‚ğŒp³‚µ‚Ä‚¢‚éƒNƒ‰ƒX‚ÉŒÀ‚é</typeparam>
+    /// <typeparam name="T">where T : T ã¯ MonoBehaviour ã‚’ç¶™æ‰¿ã—ã¦ã„ã‚‹ã‚¯ãƒ©ã‚¹ã«é™ã‚‹</typeparam>
     public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         static T instance;

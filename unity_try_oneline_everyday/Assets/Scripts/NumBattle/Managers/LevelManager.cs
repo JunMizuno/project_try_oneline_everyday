@@ -1,4 +1,4 @@
-namespace NumBattle
+﻿namespace NumBattle
 {
     public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
@@ -11,12 +11,12 @@ namespace NumBattle
         }
 
         private LevelState currentState = LevelState.Title;
-        public LevelState CurrentState 
-        { 
-            get 
+        public LevelState CurrentState
+        {
+            get
             {
                 return currentState;
-            } 
+            }
         }
 
         protected override void Awake()

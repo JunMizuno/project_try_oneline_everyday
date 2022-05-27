@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NumBattle
 {
@@ -11,12 +11,12 @@ namespace NumBattle
     {
         public void Start()
         {
-            
+
         }
 
         public void Update()
         {
-            
+
         }
     }
 }

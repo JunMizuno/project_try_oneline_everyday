@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ namespace Test
 {
     public class ScreenShot : MonoBehaviour
     {
-        [Header("•Û‘¶æƒtƒHƒ‹ƒ_–¼‚ğw’è")]
+        [Header("ä¿å­˜å…ˆãƒ•ã‚©ãƒ«ãƒ€åã‚’æŒ‡å®š")]
         [SerializeField]
         public string FolderName = "screen_shot";
 
@@ -17,7 +17,7 @@ namespace Test
 
         private void Start()
         {
-            path = Application.dataPath + "/" + FolderName + "/";    
+            path = Application.dataPath + "/" + FolderName + "/";
         }
 
         public void PrintScreen()

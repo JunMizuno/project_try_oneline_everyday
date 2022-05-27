@@ -1,4 +1,4 @@
-namespace NumBattle
+﻿namespace NumBattle
 {
     public class ObjectManager : SingletonMonoBehaviour<ObjectManager>
     {

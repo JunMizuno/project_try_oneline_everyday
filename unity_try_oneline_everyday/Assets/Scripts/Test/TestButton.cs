@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,9 +12,9 @@ namespace Test
             var button = GetComponent<Button>();
             if (button != null)
             {
-                button.onClick.AddListener(() => 
+                button.onClick.AddListener(() =>
                 {
-                    Debug.Log("<color=cyan>" + "Clicked Button"+ "</color>");
+                    Debug.Log("<color=cyan>" + "Clicked Button" + "</color>");
                 });
             }
         }

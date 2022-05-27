@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,7 +17,7 @@ namespace NumBattle
         }
 
         /// <summary>
-        /// ƒ}ƒEƒX‚ªƒIƒuƒWƒFƒNƒgã‚Éæ‚Á‚½
+        /// ãƒã‚¦ã‚¹ãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä¸Šã«ä¹—ã£ãŸæ™‚
         /// </summary>
         public virtual void OnMouseEnter()
         {
@@ -25,7 +25,7 @@ namespace NumBattle
         }
 
         /// <summary>
-        /// ƒ}ƒEƒX‚ªƒIƒuƒWƒFƒNƒgã‚Éæ‚Á‚Ä‚¢‚éŠÔ
+        /// ãƒã‚¦ã‚¹ãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä¸Šã«ä¹—ã£ã¦ã„ã‚‹é–“
         /// </summary>
         public virtual void OnMouseOver()
         {
@@ -33,7 +33,7 @@ namespace NumBattle
         }
 
         /// <summary>
-        /// ƒ}ƒEƒX‚ªƒIƒuƒWƒFƒNƒg‚©‚ç—£‚ê‚½
+        /// ãƒã‚¦ã‚¹ãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰é›¢ã‚ŒãŸæ™‚
         /// </summary>
         public virtual void OnMouseExit()
         {
@@ -41,7 +41,7 @@ namespace NumBattle
         }
 
         /// <summary>
-        /// ƒNƒŠƒbƒN‚ª‚ ‚Á‚½
+        /// ã‚¯ãƒªãƒƒã‚¯ãŒã‚ã£ãŸæ™‚
         /// </summary>
         public virtual void OnMouseDown()
         {
@@ -52,7 +52,7 @@ namespace NumBattle
         }
 
         /// <summary>
-        /// ƒNƒŠƒbƒN‚ª‰ğœ‚³‚ê‚½
+        /// ã‚¯ãƒªãƒƒã‚¯ãŒè§£é™¤ã•ã‚ŒãŸæ™‚
         /// </summary>
         public virtual void OnMouseUp()
         {
@@ -60,7 +60,7 @@ namespace NumBattle
         }
 
         /// <summary>
-        /// ƒNƒŠƒbƒN‰ğœ‚É‚»‚ê‚ªƒIƒuƒWƒFƒNƒgã‚¾‚Á‚½ê‡
+        /// ã‚¯ãƒªãƒƒã‚¯è§£é™¤æ™‚ã«ãã‚ŒãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä¸Šã ã£ãŸå ´åˆ
         /// </summary>
         public virtual void OnMouseUpAsButton()
         {
@@ -68,7 +68,7 @@ namespace NumBattle
         }
 
         /// <summary>
-        /// ƒNƒŠƒbƒNŒã‚Éƒhƒ‰ƒbƒO‚ª‘±‚¢‚Ä‚¢‚éŠÔ
+        /// ã‚¯ãƒªãƒƒã‚¯å¾Œã«ãƒ‰ãƒ©ãƒƒã‚°ãŒç¶šã„ã¦ã„ã‚‹é–“
         /// </summary>
         public virtual void OnMouseDrag()
         {

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Test
@@ -7,10 +7,10 @@ namespace Test
     {
         private void Start()
         {
-            // target : ŒÄ‚Ño‚·‘ÎÛ‚ÌƒIƒuƒWƒFƒNƒg
-            // eventData : ƒCƒxƒ“ƒgƒf[ƒ^(ƒ‚ƒWƒ…[ƒ‹‚È‚Ç‚Ìî•ñ)
-            // functor : ‘€ì
-            ExecuteEvents.Execute<IReceiveEvent>(target:gameObject, eventData:null, functor: (receiver, eventData) => receiver.OnReceive());
+            // target : å‘¼ã³å‡ºã™å¯¾è±¡ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+            // eventData : ã‚¤ãƒ™ãƒ³ãƒˆãƒ‡ãƒ¼ã‚¿(ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãªã©ã®æƒ…å ±)
+            // functor : æ“ä½œ
+            ExecuteEvents.Execute<IReceiveEvent>(target: gameObject, eventData: null, functor: (receiver, eventData) => receiver.OnReceive());
         }
     }
 }
