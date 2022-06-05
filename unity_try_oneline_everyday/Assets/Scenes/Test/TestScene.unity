@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 853824292}
   - component: {fileID: 853824295}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: MoveCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1365,12 +1365,12 @@ GameObject:
   - component: {fileID: 1484352544}
   - component: {fileID: 1484352547}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: ScaleSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1484352543
 Transform:
   m_ObjectHideFlags: 0
