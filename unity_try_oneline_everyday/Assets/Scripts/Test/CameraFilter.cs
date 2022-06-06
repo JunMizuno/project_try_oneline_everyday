@@ -5,7 +5,9 @@ using UnityEngine;
 namespace Test
 {
     /// <summary>
-    /// PostEffect用。
+    /// PostEffect用。(!!URPでは使用不可になってます!!)
+    /// URPではPostProcessingをインストールし、GlobalValueを設定して表現する模様。
+    /// 個別のオブジェクトには流用できるかもしれない。
     /// </summary>
     [ExecuteInEditMode, ImageEffectAllowedInSceneView]
     public class CameraFilter : MonoBehaviour
@@ -13,11 +15,17 @@ namespace Test
         [SerializeField]
         private Material filter;
 
-        [SerializeField]
-        public bool isEnableBlur = default;
+        [SerializeField, Header("FastBlur")]
+        private bool isEnableBlur = default;
 
         [SerializeField, Range(0.0f, 30.0f)]
-        public float blurSize = 2.0f;
+        private float blurSize = 2.0f;
+
+        [SerializeField, Header("ShakeColor")]
+        private bool isEnableShake = default;
+
+        [SerializeField, Range(0.01f, 1.0f)]
+        private float intensity = 0.01f;
 
         private void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
@@ -30,6 +38,10 @@ namespace Test
                 if (filter.name == "FastBlur" && isEnableBlur)
                 {
                     SetFastBlur(source, destination);
+                }
+                else if (filter.name == "ShakeColor" && isEnableShake)
+                {
+                    SetShakeColor(source, destination);
                 }
                 else
                 {
@@ -51,6 +63,24 @@ namespace Test
 
             RenderTexture.ReleaseTemporary(temp1);
             RenderTexture.ReleaseTemporary(temp2);
+        }
+
+        private void SetShakeColor(RenderTexture source, RenderTexture destination)
+        {
+            int redOffsetPropertyId = Shader.PropertyToID("_RedOffset");
+            int greenOffsetPropertyId = Shader.PropertyToID("_GreenOffset");
+            int blueOffsetPropertyId = Shader.PropertyToID("_BlueOffset");
+
+            filter.SetVector(redOffsetPropertyId, GenerateRandomOffset(intensity));
+            filter.SetVector(greenOffsetPropertyId, GenerateRandomOffset(intensity));
+            filter.SetVector(blueOffsetPropertyId, GenerateRandomOffset(intensity));
+
+            Graphics.Blit(source, destination, filter);
+        }
+
+        private Vector2 GenerateRandomOffset(float intensity)
+        {
+            return new Vector2(Random.Range(-intensity, intensity), Random.Range(-intensity, intensity));
         }
     }
 }

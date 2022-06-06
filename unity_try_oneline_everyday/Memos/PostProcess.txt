@@ -1,0 +1,11 @@
+Layer に PostProcessing を追加する。(命名は適宜。)
+
+カメラに Post-process Layer をアタッチする。
+
+(必要であれば、Renderer の設定を確認する。Post-processing フラグが立っているか？など。)
+
+ヒエラルキーに Create で Global Volume を生成する。
+
+課題：自分で効果を作成するのはどうするのか？
+
+URP テンプレートでプロジェクトを作成した場合、Aseets -> Settings にレンダラー関連のファイルがある模様。
