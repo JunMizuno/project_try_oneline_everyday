@@ -93,4 +93,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05530092a9df1d44901f2db98a3bd1d, type: 3}
   m_Name: DownSamplingRenderFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
+  sampleValue: 10
