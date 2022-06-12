@@ -25,6 +25,8 @@ namespace Test
 
             Debug.Log("<color=cyan>" + "戻り値として受け取った値:" + str1 + "</color>");
 
+            WaitVoidFuncAsync();
+
             await WaitReturnTestAsync(2);
 
             WaitVoidTestAsync(2).Forget();
@@ -67,6 +69,15 @@ namespace Test
             Debug.Log("<color=cyan>" + "WaitReturnTestAsync終了" + "</color>");
 
             return retValue;
+        }
+
+        private async void WaitVoidFuncAsync()
+        {
+            Debug.Log("<color=cyan>" + "WaitVoidFuncAsync開始" + "</color>");
+
+            await UniTask.Delay((int)(5 * 1000));
+
+            Debug.Log("<color=cyan>" + "WaitVoidFuncAsync終了" + "</color>");
         }
     }
 }
