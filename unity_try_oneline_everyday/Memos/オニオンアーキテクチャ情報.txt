@@ -1,0 +1,62 @@
+・オニオンアーキテクチャ
+　UIの設計思想の一種。
+　4層の概念を設けて、役割や責任範囲、依存関係を明確にして開発する手法。
+
+・4層の役割イメージ
+　domain : 「ドメイン(領域)」の表現。
+　infra : 技術基盤。
+　application : 利用事例、機能要求。
+　presentation : 表示。
+
+・依存関係
+　それぞれで利用して良い層
+　 domain : なし。(domainでInfraやapplicationを利用することはない。)
+　 application : domain
+　 infra : domain、application
+　 presentation : domain、application、Infra
+　
+　下の層から上の層へ向かって依存が発生する。上から下へ依存することはNG。
+
+・Domain層
+　概要
+　ドメインの表現をする層。
+　ドメインに関わる「データ構造」とドメインに必要な処理の「インターフェース」を定義する。
+　
+　データ構造
+　ゲーム上で表現するために必要なデータ型の定義。(例えばエンティティ、オブジェクトバリューなど。)
+
+　インターフェース
+　どのような処理をする必要があるかというインターフェース定義。
+　インターフェースのみで実装はしない。(実装はInfraで行う。)
+　メソッドの引数などもDomain層で定義したデータ型になる。
+　Domain層がマスタやAPIレスポンスに依存することを避ける目的もある。
+　実装例として、xxxCommand(API関連)、xxxRepository(マスタデータ関連)、xxxResources(アセット関連)。
+
+・Infra層
+　データの永続化処理、外部サービスとのやり取りを行う層。
+　マスタデータ、API、アセット関連の処理など、導入しているライブラリや依存しているフレームワークなどに左右されるような処理を担う。
+　Domain層で定義したインターフェースを実際に実装する。
+
+・Application層
+　Domain層で定義されたデータ型やインターフェースを利用したり組み合わせて、必要な処理の実装を行う。
+　Infra層には依存しない形をとる。
+　実装例として、Command、Repository、ResourcesなどのInfra層で実装しているオブジェクトの実態を、Domain層で定義したインターフェースで受け取って保持する。
+　Serviceの利用はPresentation層のPresenterに任せるべき。
+
+・Presentation層
+　ゲームオブジェクトにアタッチされるコンポーネントレベルの層。
+　ビュー、UIなど、ユーザーが触る部分、ユーザーから見える部分。
+　MVCやMVVMのビューと同等。
+　シーンのルートコンポーネント、シーンに1つ存在させる。
+　xxxControllerなどコントローラーを持つ。
+
+　Controller
+　初期化や参照を行うコンポーネント。(それ以外はしないようにする。)
+　以下、初期化や参照を行う範囲例。
+　presentation : Presenter
+  Infra : Command、Repository、Resources
+  application : Service
+
+  Presenter
+　ビューのコントロール集約クラス。シーンに1つ存在させる。
+　Service、Resource、Accessorなどの参照を持つ。
