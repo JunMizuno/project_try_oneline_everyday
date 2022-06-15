@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
+using UniRx;
+using UniRx.Triggers;
 
 using UnityEngine;
 
@@ -9,6 +11,30 @@ namespace Test
 {
     public class CalcTest : MonoBehaviour
     {
+        private void Awake()
+        {
+            this.OnTriggerEnterAsObservable()
+                .Subscribe(collision =>
+                {
+                    Debug.Log("<color=cyan>" + "OnTriggerEnterAsObservable  collision.name:" + collision.name + "</color>");
+                })
+                .AddTo(this);
+
+            this.OnTriggerStayAsObservable()
+                .Subscribe(collision =>
+                {
+                    Debug.Log("<color=cyan>" + "OnTriggerStayAsObservable  collision.name:" + collision.name + "</color>");
+                })
+                .AddTo(this);
+
+            this.OnTriggerExitAsObservable()
+                .Subscribe(collision =>
+                {
+                    Debug.Log("<color=cyan>" + "OnTriggerExitAsObservable  collision.name:" + collision.name + "</color>");
+                })
+                .AddTo(this);
+        }
+
         private void Start()
         {
             UniTaskTestAsync();
@@ -78,6 +104,16 @@ namespace Test
             await UniTask.Delay((int)(5 * 1000));
 
             Debug.Log("<color=cyan>" + "WaitVoidFuncAsync終了" + "</color>");
+        }
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("<color=cyan>" + "OnCollisionEnter  collision.name:" + collision.gameObject.name + "</color>");
+        }
+
+        public void OnCollisionExit(Collision collision)
+        {
+            Debug.Log("<color=cyan>" + "OnCollisionExit  collision.name:" + collision.gameObject.name + "</color>");
         }
     }
 }
