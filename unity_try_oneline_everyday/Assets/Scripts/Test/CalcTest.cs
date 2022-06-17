@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 using Cysharp.Threading.Tasks;
 using UniRx;
@@ -47,6 +48,9 @@ namespace Test
 
         private async void UniTaskTestAsync()
         {
+            var cts = new CancellationTokenSource();
+            cts.Token.ThrowIfCancellationRequested();
+
             var str1 = await WaitTestAsync(3);
 
             Debug.Log("<color=cyan>" + "戻り値として受け取った値:" + str1 + "</color>");
