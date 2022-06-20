@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+using Utility;
+
 namespace Test
 {
     public class Rotate : MonoBehaviour
@@ -39,12 +41,7 @@ namespace Test
         {
             var selfScreenPoint = Camera.main.WorldToScreenPoint(targetObject.transform.position);
 
-            Vector3 diff = mousePosition - selfScreenPoint;
-
-            float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-            float finalAngle = angle - 90.0f;
-
-            Debug.Log("<color=cyan>" + "CalcAngle  angle:" + angle + "  finalAngle:" + finalAngle + "</color>");
+            float finalAngle = UtilityFunc.GetRotationZAngle(mousePosition, selfScreenPoint);
 
             return finalAngle;
         }
