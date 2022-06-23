@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 using Cysharp.Threading.Tasks;
@@ -12,6 +14,9 @@ namespace Test
 {
     public class CalcTest : MonoBehaviour
     {
+        public IObserver<Tuple<int, string>> TestAsObservable => this.TestSubject;
+        private readonly Subject<Tuple<int, string>> TestSubject = new Subject<Tuple<int, string>>();
+
         private void Awake()
         {
             this.OnTriggerEnterAsObservable()
@@ -34,22 +39,62 @@ namespace Test
                     Debug.Log("<color=cyan>" + "OnTriggerExitAsObservable  collision.name:" + collision.name + "</color>");
                 })
                 .AddTo(this);
+
+            TestSubject
+                .Subscribe((tuple) => Debug.Log("<color=yellow>" + "TestSubject  tuple.item1:" + tuple.Item1 + "  tuple.item2:" + tuple.Item2 + " </color>"))
+                .AddTo(this);
         }
 
         private void Start()
         {
-            UniTaskTestAsync();
-        }
+            UniTaskTestAsync(this.GetCancellationTokenOnDestroy());
 
+            List<(int, int)> baseList = new List<(int, int)>()
+            {
+                (1, 2),
+                (3, 4),
+                (5, 6),
+                (7, 8),
+                (9, 10),
+            };
+
+            List<int> afterList = new List<int>();
+
+            baseList.ForEach((x) =>
+            {
+                afterList.Add(x.Item1);
+                afterList.Add(x.Item2);
+            });
+
+            var convertedList = baseList.Select(x => new Pair<int>(x.Item2, x.Item1)).ToList();
+            convertedList.ForEach((x) =>
+            {
+                Debug.Log("<color=yellow>" + "convertedList  Previous:" + x.Previous + "  Current:" + x.Current + " </color>");
+            });
+
+            var finalList = afterList
+                .Where((x) => x % 2 == 0)
+                .Select((x) => x)
+                .ToList();
+
+            finalList.ForEach((x) =>
+            {
+                Debug.Log("<color=yellow>" + "finalList  x:" + x + " </color>");
+            });
+
+            TestSubject.OnNext(new Tuple<int, string>(1, "string is 2"));
+        }
+ 
         private void Update()
         {
 
         }
 
-        private async void UniTaskTestAsync()
+        private async void UniTaskTestAsync(CancellationToken token)
         {
             var cts = new CancellationTokenSource();
             cts.Token.ThrowIfCancellationRequested();
+            token.ThrowIfCancellationRequested();
 
             var str1 = await WaitTestAsync(3);
 
