@@ -10,3 +10,6 @@
 *.ttf filter=lfs diff=lfs merge=lfs -text
 #*.asset filter=lfs diff=lfs merge=lfs -text
 #TextMesh Pro\Resources\Fonts & Materials\LiberationSans SDF.assetは対応させられなかったので物理的に削除
+*/LiberationSans SDF.asset filter=lfs diff=lfs merge=lfs -text
+*/NotoSansJP-Light.otf filter=lfs diff=lfs merge=lfs -text
+*/NotoSansJP-Light SDF.asset filter=lfs diff=lfs merge=lfs -text

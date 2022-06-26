@@ -17,6 +17,9 @@ namespace Test
         public IObserver<Tuple<int, string>> TestAsObservable => this.TestSubject;
         private readonly Subject<Tuple<int, string>> TestSubject = new Subject<Tuple<int, string>>();
 
+        public IObservable<(string, int, string)> Test2AsObservable => Test2Subject;
+        private readonly Subject<(string, int, string)> Test2Subject = new Subject<(string, int, string)>();
+
         private void Awake()
         {
             this.OnTriggerEnterAsObservable()
@@ -42,6 +45,10 @@ namespace Test
 
             TestSubject
                 .Subscribe((tuple) => Debug.Log("<color=yellow>" + "TestSubject  tuple.item1:" + tuple.Item1 + "  tuple.item2:" + tuple.Item2 + " </color>"))
+                .AddTo(this);
+
+            Test2Subject
+                .Subscribe(tuple => Debug.Log("<color=yellow>" + "Test2Subject  tuple.item1:" + tuple.Item1 + "  tuple.item2:" + tuple.Item2 + "  tuple.item3:" + tuple.Item3 + " </color>"))
                 .AddTo(this);
         }
 
@@ -83,6 +90,8 @@ namespace Test
             });
 
             TestSubject.OnNext(new Tuple<int, string>(1, "string is 2"));
+
+            Test2Subject.OnNext(("あ", 2, "さ"));
         }
  
         private void Update()
@@ -109,6 +118,18 @@ namespace Test
             var str2 = await WaitTestAsync(1);
 
             Debug.Log("<color=cyan>" + "戻り値として受け取った値:" + str2 + "</color>");
+
+            Debug.Log("<color=cyan>" + "WaitCompleteFuncAsync  開始" + "</color>");
+
+            var intList = await WaitCompleteFuncAsync();
+
+            Debug.Log("<color=cyan>" + "WaitCompleteFuncAsync  終了" + "</color>");
+
+            Debug.Log("<color=cyan>" + "戻り値として受け取った値:" + "</color>");
+            intList.ForEach(x =>
+            {
+                Debug.Log("<color=cyan>" + x + "</color>");
+            });
         }
 
 
@@ -153,6 +174,24 @@ namespace Test
             await UniTask.Delay((int)(5 * 1000));
 
             Debug.Log("<color=cyan>" + "WaitVoidFuncAsync終了" + "</color>");
+        }
+
+        private async UniTask<List<int>> WaitCompleteFuncAsync()
+        {
+            var ts = new UniTaskCompletionSource<List<int>>();
+
+            var list = new List<int>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                list.Add(i);
+
+                await UniTask.Delay(500);
+            }
+
+            ts.TrySetResult(list);
+
+            return await ts.Task;
         }
 
         public void OnCollisionEnter(Collision collision)
