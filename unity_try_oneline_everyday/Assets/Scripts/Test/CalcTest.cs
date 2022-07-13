@@ -79,15 +79,14 @@ namespace Test
                 Debug.Log("<color=yellow>" + "convertedList  Previous:" + x.Previous + "  Current:" + x.Current + " </color>");
             });
 
-            var finalList = afterList
+            afterList
                 .Where((x) => x % 2 == 0)
                 .Select((x) => x)
-                .ToList();
-
-            finalList.ForEach((x) =>
-            {
-                Debug.Log("<color=yellow>" + "finalList  x:" + x + " </color>");
-            });
+                .ToList()
+                .ForEach((x) =>
+                {
+                    Debug.Log("<color=yellow>" + "finalList  x:" + x + " </color>");
+                });
 
             TestSubject.OnNext(new Tuple<int, string>(1, "string is 2"));
 
