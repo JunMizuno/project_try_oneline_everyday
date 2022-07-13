@@ -88,7 +88,7 @@ namespace Test
                     Debug.Log("<color=yellow>" + "finalList  x:" + x + " </color>");
                 });
 
-            TestSubject.OnNext(new Tuple<int, string>(1, "string is 2"));
+            TestSubject.OnNext(System.Tuple.Create(1, "string is 2"));
 
             Test2Subject.OnNext(("あ", 2, "さ"));
         }
