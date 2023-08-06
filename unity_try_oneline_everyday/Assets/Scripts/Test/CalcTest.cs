@@ -91,6 +91,15 @@ namespace Test
             TestSubject.OnNext(System.Tuple.Create(1, "string is 2"));
 
             Test2Subject.OnNext(("あ", 2, "さ"));
+
+
+            var testValue = 0;
+            var retValue = testValue switch
+            {
+                0 => 1,
+                1 => 2,
+                _ => 3,
+            };
         }
  
         private void Update()
