@@ -21,9 +21,9 @@ public class SamplePostEffectProcessRenderPass : ScriptableRenderPass
     private readonly ProfilingSampler _profilingSampler;
     private readonly int _tintColorPropertyId = Shader.PropertyToID("_TintColor");
 
-    private RenderTargetHandle _afterPostProcessTexture;
+    private RTHandle _afterPostProcessTexture;
     private RenderTargetIdentifier _cameraColorTarget;
-    private RenderTargetHandle _tempRenderTargetHandle;
+    private RTHandle _tempRenderTargetHandle;
     private SamplePostEffectVolume _volume;
 
     public SamplePostEffectProcessRenderPass(bool applyToSceneView, Shader shader)
