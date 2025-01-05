@@ -16,9 +16,10 @@ namespace Test
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
+            // @todo.mizuno エラー解消のため一時的にコメントアウト。
             // @memo.mizuno ScriptableRendererにPassを渡す。
             // @memo.mizuno Passは複数登録もOK。
-            renderPass.SetParameter(renderer.cameraColorTarget, sampleValue);
+            //renderPass.SetParameter(renderer.cameraColorTarget, sampleValue);
             renderer.EnqueuePass(renderPass);
         }
     }

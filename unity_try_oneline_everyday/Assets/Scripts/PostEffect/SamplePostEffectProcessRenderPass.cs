@@ -21,9 +21,11 @@ public class SamplePostEffectProcessRenderPass : ScriptableRenderPass
     private readonly ProfilingSampler _profilingSampler;
     private readonly int _tintColorPropertyId = Shader.PropertyToID("_TintColor");
 
+    // @todo.mizuno 2022以降からRenderTargetHandleが非推奨になったのでRTHandleに置き換える。
+    // @todo.mizuno エラー解消のためただ置き換えただけなので、運用方法など要確認。
     private RTHandle _afterPostProcessTexture;
-    private RenderTargetIdentifier _cameraColorTarget;
     private RTHandle _tempRenderTargetHandle;
+    private RenderTargetIdentifier _cameraColorTarget;
     private SamplePostEffectVolume _volume;
 
     public SamplePostEffectProcessRenderPass(bool applyToSceneView, Shader shader)
@@ -35,13 +37,13 @@ public class SamplePostEffectProcessRenderPass : ScriptableRenderPass
 
         _applyToSceneView = applyToSceneView;
         _profilingSampler = new ProfilingSampler(ProfilingSamplerName);
-        _tempRenderTargetHandle.Init("_TempRT");
+        _tempRenderTargetHandle = RTHandles.Alloc("_TempRT");
 
         // マテリアルを作成
         _material = CoreUtils.CreateEngineMaterial(shader);
 
         // RenderPassEvent.AfterRenderingではポストエフェクトを掛けた後のカラーテクスチャがこの名前で取得できる
-        _afterPostProcessTexture.Init("_AfterPostProcessTexture");
+        _afterPostProcessTexture = RTHandles.Alloc("_AfterPostProcessTexture");
     }
 
     public void Setup(RenderTargetIdentifier cameraColorTarget, PostprocessTiming timing)
@@ -81,7 +83,7 @@ public class SamplePostEffectProcessRenderPass : ScriptableRenderPass
 
         // renderPassEventがAfterRenderingの場合、カメラのカラーターゲットではなく_AfterPostProcessTextureを使う
         var source = renderPassEvent == RenderPassEvent.AfterRendering && renderingData.cameraData.resolveFinalTarget
-            ? _afterPostProcessTexture.Identifier()
+            ? _afterPostProcessTexture
             : _cameraColorTarget;
 
         // コマンドバッファを作成
@@ -91,7 +93,8 @@ public class SamplePostEffectProcessRenderPass : ScriptableRenderPass
         // Cameraのターゲットと同じDescription（Depthは無し）のRenderTextureを取得する
         var tempTargetDescriptor = renderingData.cameraData.cameraTargetDescriptor;
         tempTargetDescriptor.depthBufferBits = 0;
-        cmd.GetTemporaryRT(_tempRenderTargetHandle.id, tempTargetDescriptor);
+        // @todo.mizuno エラー解消のため一時的にコメントアウト。
+        //cmd.GetTemporaryRT(_tempRenderTargetHandle, tempTargetDescriptor);
 
         using (new ProfilingScope(cmd, _profilingSampler))
         {
@@ -99,15 +102,18 @@ public class SamplePostEffectProcessRenderPass : ScriptableRenderPass
             _material.SetColor(_tintColorPropertyId, _volume.tintColor.value);
             cmd.SetGlobalTexture(_mainTexPropertyId, source);
 
+            // @todo.mizuno エラー解消のため一時的にコメントアウト。
             // 元のテクスチャから一時的なテクスチャにエフェクトを適用しつつ描画
-            Blit(cmd, source, _tempRenderTargetHandle.Identifier(), _material);
+            //Blit(cmd, source, _tempRenderTargetHandle, _material);
         }
 
+        // @todo.mizuno エラー解消のため一時的にコメントアウト。
         // 一時的なテクスチャから元のテクスチャに結果を書き戻す
-        Blit(cmd, _tempRenderTargetHandle.Identifier(), source);
+        //Blit(cmd, _tempRenderTargetHandle, source);
 
+        // @todo.mizuno エラー解消のため一時的にコメントアウト。
         // 一時的なRenderTextureを解放する
-        cmd.ReleaseTemporaryRT(_tempRenderTargetHandle.id);
+        //cmd.ReleaseTemporaryRT(_tempRenderTargetHandle);
 
         context.ExecuteCommandBuffer(cmd);
         CommandBufferPool.Release(cmd);

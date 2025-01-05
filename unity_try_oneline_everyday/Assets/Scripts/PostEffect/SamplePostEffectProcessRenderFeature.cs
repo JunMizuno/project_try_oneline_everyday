@@ -18,7 +18,8 @@ public class SamplePostEffectProcessRenderFeature : ScriptableRendererFeature
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        _postProcessPass.Setup(renderer.cameraColorTarget, _timing);
+        // @todo.mizuno エラー解消のため一時的にコメントアウト。
+        //_postProcessPass.Setup(renderer.cameraColorTarget, _timing);
         renderer.EnqueuePass(_postProcessPass);
     }
 }
